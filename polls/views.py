@@ -12,11 +12,11 @@ def question_details(request, question_id):
     return render(request, 'question_details.html', {'question' : question})
 
 def choice_made(request):
-    answer_id = request.GET.get('answer')
+    answer_id = request.POST.get('answer')
     answer = Answer.objects.get(pk = answer_id)
     answer.votes += 1
     answer.save()
     return HttpResponse("Выбор сделан!")
 
 def test(request):
-    return HttpResponse("Сам ты тест")
+    return render(request, 'test.html')

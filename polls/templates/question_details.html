@@ -5,7 +5,8 @@
         <h1>Сделай свой выбор!</h1>
         <h3>{{ question.question_text }} </h3>
 
-        <form action="choice_made.html">
+        <form action="choice_made", method="POST">
+            {% csrf_token %}
             {% for answer in question.answer_set.all %}
             <input type="radio" name="answer" id="{{answer.pk}}" value="{{answer.pk}}">
             <label for = 'answer_{{answer.pk}}'>{{answer.answer_text}}</label>
