@@ -3,9 +3,15 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Question, Answer
 
+# def index(request):
+#     all_questions = Question.objects.filter(is_active = True)
+#     return render(request, 'index.html', {'all_questions' : all_questions})
+
 def index(request):
-    all_questions = Question.objects.filter(is_active = True)
-    return render(request, 'index.html', {'all_questions': all_questions})
+    all_questions = Question.objects.all()
+    template = loader.get_template('index.html')
+    context = {'all_questions' : all_questions}
+    return HttpResponse(template.render(context, request))
 
 def question_details(request, question_id):
     question = Question.objects.get(pk = question_id)
@@ -16,7 +22,10 @@ def choice_made(request):
     answer = Answer.objects.get(pk = answer_id)
     answer.votes += 1
     answer.save()
-    return HttpResponse("Выбор сделан!")
+    return render(request, 'choice_made.html')
 
-def test(request):
-    return render(request, 'test.html')
+def results(request):
+    all_answers = Answer.objects.all()
+    template = loader.get_template('results.html')
+    context = {'all_answers' : all_answers}
+    return render(context, request)

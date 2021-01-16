@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>results</title>
+    </head>
+    <body>
+        <h1>Результатики</h1>
+        <ul>
+            {% for a in all_answers %}
+                <li>{{ a.answer_text }}</li>
+            {% endfor %}
+        </ul>
+        
+    </body>
+
+</html>
